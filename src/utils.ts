@@ -37,10 +37,8 @@ export function createTextBinaryHash(
     const content = payload.type === 'text' ? payload.text : payload.bytes;
     const encoding = payload.type === 'text' ? 'utf8' : 'base64';
 
-    const payloadBuffer = Buffer.concat([
-        Buffer.from(typePrefix),
-        Buffer.from(content, encoding as BufferEncoding),
-    ]);
+    const payloadPrefix = Buffer.from(typePrefix);
+    const payloadBuffer = Buffer.from(content, encoding);
     const payloadLenBuffer = Buffer.alloc(4);
     payloadLenBuffer.writeUInt32BE(payloadBuffer.length);
 
@@ -52,6 +50,7 @@ export function createTextBinaryHash(
         domainLenBuffer,
         domainBuffer,
         tsBuffer,
+        payloadPrefix,
         payloadLenBuffer,
         payloadBuffer,
     ]);
