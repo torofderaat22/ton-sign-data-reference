@@ -172,7 +172,7 @@ describe('sign-data', () => {
             const signedData = signData({
                 payload: {
                     type: 'cell',
-                    schema: 'message#_ text:string = Message',
+                    schema: 'message#_ text:string = Message;',
                     cell: createTestCell('Hello, TON!'),
                 },
                 domain: TEST_DOMAIN,
@@ -192,7 +192,7 @@ describe('sign-data', () => {
             const signedData = signData({
                 payload: {
                     type: 'cell',
-                    schema: 'message#_ text:string = Message',
+                    schema: 'message#_ text:string = Message;',
                     cell: createTestCell('Hello, TON!'),
                 },
                 domain: TEST_DOMAIN,
@@ -203,7 +203,7 @@ describe('sign-data', () => {
             // Modify cell data
             signedData.payload = {
                 type: 'cell',
-                schema: 'message#_ text:string = Message',
+                schema: 'message#_ text:string = Message;',
                 cell: createTestCell('Hacked!'),
             };
 
@@ -219,7 +219,7 @@ describe('sign-data', () => {
             const signedData = signData({
                 payload: {
                     type: 'cell',
-                    schema: 'message#_ text:string = Message',
+                    schema: 'message#_ text:string = Message;',
                     cell: createTestCell('Hello, TON!'),
                 },
                 domain: TEST_DOMAIN,
@@ -228,7 +228,7 @@ describe('sign-data', () => {
             });
 
             // Modify schema
-            (signedData.payload as SignDataPayloadCell).schema = 'hacked#_ text:string = Hacked';
+            (signedData.payload as SignDataPayloadCell).schema = 'hacked#_ text:string = Hacked;';
 
             const isValid = verifySignData({
                 signedData,
